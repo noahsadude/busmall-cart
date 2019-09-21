@@ -3,6 +3,7 @@
 'use strict';
 
 var selectElement = document.getElementById('items');
+var itemsInCart = 0;
 // Set up an empty cart for use on this page.
 var cart = new Cart([]);
 
@@ -38,11 +39,15 @@ function addSelectedItemToCart() {
   var item = selectElement.options[selectElement.selectedIndex].value;
   var qty = document.getElementById('quantity').value;
   console.log(`${item}, ${qty}`);
-  // TODO: using those, add one item to the Cart
+  new CartItem(item,qty);
 }
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
-function updateCounter() {}
+function updateCounter() {
+  var qty = parseInt(selectElement.options[selectElement.selectedIndex].value);
+  itemsInCart += qty;
+  
+}
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview() {
