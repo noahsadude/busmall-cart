@@ -15,6 +15,7 @@ var Cart = function(items) {
   },
   allItems.push(this);
 };
+
 console.log(allItems); 
 
 Cart.prototype.addItem = function(product, quantity) {
