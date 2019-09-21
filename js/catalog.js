@@ -3,6 +3,7 @@
 'use strict';
 
 var selectElement = document.getElementById('items');
+var cartContents = document.getElementById('cartContents');
 var itemsInCart = 0;
 // Set up an empty cart for use on this page.
 var cart = new Cart([]);
@@ -40,19 +41,37 @@ function addSelectedItemToCart() {
   var qty = document.getElementById('quantity').value;
   console.log(`${item}, ${qty}`);
   new CartItem(item,qty);
+  cart.items = cartItemsArr;
+
 }
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
 function updateCounter() {
-  var qty = parseInt(selectElement.options[selectElement.selectedIndex].value);
+  var qty = parseInt(document.getElementById('quantity').value);
   itemsInCart += qty;
-  
+  renderTotalItems.textContent = `Items in cart: ${itemsInCart}`;
 }
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview() {
-  // TODO: Get the item and quantity from the form
-  // TODO: Add a new element to the cartContents div with that information
+  var item = selectElement.options[selectElement.selectedIndex].value;
+  var qty = document.getElementById('quantity').value;
+  var itemRender = renderElements('tr',cartTable,);
+  renderElements('td',itemRender,item);
+  renderElements('td',itemRender,qty);
+}
+
+var renderTotalItems = renderElements('p',cartContents,`Items in cart: ${itemsInCart}`); 
+var cartTable = renderElements('table',cartContents);
+var tableHeader = renderElements('tr',cartTable);
+renderElements('td',tableHeader,'Item');
+renderElements('td',tableHeader,'Quantity');
+
+function renderElements(element,parent,content){
+  var el = document.createElement(element);
+  el.textContent = content;
+  parent.appendChild(el);
+  return el;
 }
 
 // Set up the "submit" event listener on the form.
