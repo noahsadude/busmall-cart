@@ -12,7 +12,7 @@ var Cart = function(items) {
   this.render = function(){
     var liEl = document.createElement('li');
     liEl.textContent = this.item;
-    catlist.appendChild(liEl);
+    cartList.appendChild(liEl);
   }
 };
 
